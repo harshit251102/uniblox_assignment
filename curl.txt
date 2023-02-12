@@ -1,0 +1,40 @@
+1. API to place an order without applying discount discount_code
+
+curl --location --request POST 'http://localhost:3000/api/user/createOrder' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+        
+        "amount" : "500",
+        "customerId" : "1",
+        "items" : [{
+            "name" :"soap",
+            "quantity" : "3",
+            "price" : "100"
+            },
+            {
+            "name" :"bottle",
+            "quantity" : "1",
+            "price" : "150"
+            },
+            {
+            "name" :"shampoo",
+            "quantity" : "1",
+            "price" : "150"
+            },
+            {
+            "name" :"noodles",
+            "quantity" : "2",
+            "price" : "100"
+            }
+        ],
+        "isDiscount" : false
+}'
+
+2. API to generate discount code
+curl --location --request POST 'http://localhost:3000/api/admin/generateDiscountCode' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "customerId" : "1"
+}'
+
+3. 

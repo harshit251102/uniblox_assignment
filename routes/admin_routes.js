@@ -1,5 +1,7 @@
 const express=require('express')
-const UserController=require('../http/controllers/UserController')
+const AdminController=require('../http/controllers/AdminController')
 const router=express.Router()
+
+router.post('/generateDiscountCode',AdminController.generateDiscountCode);
 
 module.exports=router
