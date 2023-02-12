@@ -13,7 +13,7 @@ module.exports = {
         raw: true,
       });
       if (!ifFound) {
-        return res.send({
+        return response.send({
           code: 401,
           message: "Discount code is not valid",
         });
