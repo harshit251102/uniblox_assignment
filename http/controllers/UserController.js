@@ -15,7 +15,7 @@ module.exports = {
       if (!ifFound) {
         return res.send({
           code: 401,
-          message: "No discount code availble for you",
+          message: "Discount code is not valid",
         });
       } else {
         const record = await models.Orders.create({
