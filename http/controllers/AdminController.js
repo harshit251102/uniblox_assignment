@@ -1,4 +1,6 @@
 const models = require("../../models");
+const { sequelize } = require("./../../models/index");
+const { QueryTypes } = require("sequelize");
 
 module.exports = {
     async generateDiscountCode(req,response){
@@ -43,6 +45,29 @@ module.exports = {
         else {
             return response.send({code:201,message:"Customer is not found"});
         }
+    },
+    async getDetails(req,response){
+
+        let query = `
+        SELECT
+           (SELECT COUNT(*) FROM orders) AS total_orders,
+           (SELECT COUNT(*) FROM orders WHERE is_discount = 1) AS total_discount_orders,
+           (SELECT SUM(amount) FROM orders) AS total_purchased_amount,
+           (SELECT SUM(discount_amount) FROM orders) AS total_discount_amount,
+           (SELECT SUM(quantity) FROM items) AS total_purchased_items,
+           (
+            SELECT 
+                JSON_ARRAYAGG(JSON_OBJECT(
+                "discount_codes",orders.discount_code
+                ))
+                FROM orders where is_discount=1
+            ) as discount_codes
+        `;
+        
+        let result = await sequelize.query(query, {
+            type: QueryTypes.SELECT,
+          });
+        return response.send({code:201,message:result});
     }
 };
   

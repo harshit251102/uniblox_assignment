@@ -37,4 +37,38 @@ curl --location --request POST 'http://localhost:3000/api/admin/generateDiscount
     "customerId" : "1"
 }'
 
-3. 
+3. API to place an order after applying discount code
+curl --location --request POST 'http://localhost:3000/api/user/createOrder' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+        
+        "amount" : "500",
+        "customerId" : "1",
+        "items" : [{
+            "name" :"soap",
+            "quantity" : "3",
+            "price" : "100"
+            },
+            {
+            "name" :"bottle",
+            "quantity" : "1",
+            "price" : "150"
+            },
+            {
+            "name" :"shampoo",
+            "quantity" : "1",
+            "price" : "150"
+            },
+            {
+            "name" :"noodles",
+            "quantity" : "2",
+            "price" : "100"
+            }
+        ],
+        "isDiscount" : true,
+        "discountCode" : "8PuNP"
+}'
+
+4. API for admin to get the details of orders placed and items purchased
+
+curl --location --request GET 'http://localhost:3000/api/admin/getDetails'

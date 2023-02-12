@@ -22,6 +22,7 @@ module.exports = {
           amount: amount,
           customer_id: customerId,
           isDiscount: true,
+          discount_code: discountCode,
           discountAmount: amount / 10,
           finalAmount: amount - amount / 10,
         });
